@@ -1,26 +1,174 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   WORK UP FIT — DESIGN TOKENS
+   Derived from the official brand material (11 program key visuals + logo).
+   Every colour below was sampled from those files; nothing is invented.
+   Base = deep navy-black of the neon-lit studio; primary = the electric blue
+   used across the FIGHT / BIKE / JUMP family.
+   ========================================================================== */
+
+@theme {
+  /* --- surfaces ------------------------------------------------------- */
+  --color-ink-950: #05080F;   /* page background, deepest */
+  --color-ink-900: #070B14;   /* default background */
+  --color-ink-850: #0B1120;   /* raised background / alternating sections */
+  --color-ink-800: #0E1626;   /* card surface */
+  --color-ink-700: #141F33;   /* card surface, hovered */
+  --color-ink-600: #1E2A44;   /* border */
+  --color-ink-500: #2A3A5C;   /* border, strong */
+
+  /* --- text ----------------------------------------------------------- */
+  --color-chalk: #F5F8FF;
+  --color-chalk-dim: #C8D3E6;
+  --color-muted: #93A3BF;     /* 7.4:1 on ink-850 */
+
+  /* --- primary (sampled: FIGHT #3CB4FC / BIKE #0CC4E4) ----------------- */
+  --color-volt-300: #7FD2FF;
+  --color-volt-400: #37B7FF;
+  --color-volt-500: #0FA5F0;
+  --color-volt-600: #0B84C4;
+  --color-cyan-400: #0CC4E4;
+
+  /* --- programme families (sampled from the badges) -------------------- */
+  --color-fam-cardio: #37B7FF;
+  --color-fam-dance: #5474FC;
+  --color-fam-strength: #FC3434;
+  --color-fam-wellness: #04C464;
+
+  /* --- state ---------------------------------------------------------- */
+  --color-success: #04C464;
+  --color-warning: #F5A524;
+  --color-danger: #FC5454;
+
+  /* --- radii ---------------------------------------------------------- */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-2xl: 36px;
+
+  /* --- type ----------------------------------------------------------- */
+  --font-display: var(--font-barlow-condensed), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --text-display-xl: clamp(2.5rem, 5.2vw, 4.75rem);
+  --text-display-xl--line-height: 0.92;
+  --text-display-lg: clamp(2.1rem, 4.2vw, 3.5rem);
+  --text-display-lg--line-height: 0.95;
+  --text-display-md: clamp(1.8rem, 3.2vw, 2.6rem);
+  --text-display-md--line-height: 1;
+  --text-display-sm: clamp(1.45rem, 2.4vw, 2rem);
+  --text-display-sm--line-height: 1.08;
+
+  /* --- motion --------------------------------------------------------- */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* --- shadows -------------------------------------------------------- */
+  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 18px 40px -24px rgb(0 0 0 / 0.9);
+  --shadow-lift: 0 1px 0 0 rgb(255 255 255 / 0.06) inset, 0 30px 60px -28px rgb(0 0 0 / 0.95);
+  --shadow-volt: 0 12px 34px -14px rgb(55 183 255 / 0.55);
+}
+
+/* Per-programme accent, set inline via the `--accent` custom property so a
+   single Card component adapts to all eleven programmes without variants. */
+@theme {
+  --color-accent: var(--accent, var(--color-volt-400));
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+  --accent: #37B7FF;
+  --accent-soft: rgb(55 183 255 / 0.14);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-ink-900);
+  color: var(--color-chalk);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-volt-400);
+  color: #04121C;
+}
+
+/* Focus ring — visible, brand-coloured, never removed. */
+:focus-visible {
+  outline: 2px solid var(--color-volt-400);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Display type: the wordmark is a heavy italic condensed grotesque, so all
+   display headings echo it. */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+}
+.font-display-italic {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+}
+
+@utility container-wuf {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  max-width: 78rem;
+  @media (width >= 48rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Section rhythm */
+@utility section-y {
+  padding-block: clamp(4rem, 9vw, 7.5rem);
+}
+
+/* Subtle animated grain/glow used behind hero + CTA blocks */
+@utility glow-radial {
+  background-image: radial-gradient(
+    60% 60% at 50% 0%,
+    color-mix(in oklab, var(--accent) 22%, transparent) 0%,
+    transparent 70%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  /* Scroll-revealed content is shown immediately and unconditionally. The
+     !important beats the inline style the animation library writes, so the
+     content can never be left invisible. */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Hover zooms are motion too. */
+  [data-hover-zoom] {
+    transform: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
