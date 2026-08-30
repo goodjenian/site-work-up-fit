@@ -21,17 +21,17 @@ export function CertificateLookup() {
 
   const [code, setCode] = useState("");
   const [error, setError] = useState<string | undefined>();
-  const [result, setResult] = useState<CertificateResult | null>(null);
+  // Stored with the code it belongs to, so switching codes clears the old
+  // answer by derivation rather than by a second render from an effect.
+  const [entry, setEntry] = useState<{ code: string; result: CertificateResult } | null>(null);
+  const result = entry?.code === submitted ? entry.result : null;
 
   useEffect(() => {
-    if (!submitted) {
-      setResult(null);
-      return;
-    }
+    if (!submitted) return;
     let live = true;
-    // A stale response must never overwrite a newer code's result.
+    // A slow response for an earlier code must never land on a newer one.
     lookupCertificate(submitted).then((r) => {
-      if (live) setResult(r);
+      if (live) setEntry({ code: submitted, result: r });
     });
     return () => {
       live = false;

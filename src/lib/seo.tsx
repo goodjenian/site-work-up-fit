@@ -15,7 +15,7 @@ export function buildMetadata({
   title,
   description,
   path,
-  image = "/opengraph-image",
+  image = "/og.png",
   type = "website",
   noIndex,
 }: SeoInput): Metadata {

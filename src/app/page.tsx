@@ -14,6 +14,22 @@ import { PageView } from "@/components/PageView";
 import { answeredFaqs, faqs } from "@/data/faqs";
 import { site } from "@/data/site";
 import { JsonLd } from "@/lib/seo";
+import { absoluteUrl } from "@/lib/url";
+
+/**
+ * Only the social card is declared here — title, description and canonical come
+ * from the root layout, which already says the right thing for the home page.
+ *
+ * Without this the `opengraph-image` file convention wins over the layout and
+ * emits an extension-less URL that static hosts serve as octet-stream.
+ */
+export const metadata = {
+  alternates: { canonical: absoluteUrl("/") },
+  openGraph: {
+    images: [{ url: absoluteUrl("/og.png"), width: 1200, height: 630, alt: site.name }],
+  },
+  twitter: { images: [absoluteUrl("/og.png")] },
+};
 
 export default function HomePage() {
   return (

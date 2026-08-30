@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { programs } from "@/data/programs";
 import { posts } from "@/data/posts";
-import { site } from "@/data/site";
 import { absoluteUrl } from "@/lib/url";
 
 // Emitted at build time — the static export has no server to render it on
