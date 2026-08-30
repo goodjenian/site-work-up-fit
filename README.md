@@ -93,14 +93,14 @@ decorativo que pode simplesmente não existir, use `useMotionAllowed()`, que é
 
 ## Publicação
 
-No ar em **https://goodjenian.github.io/-site-work-up-fit/**
+No ar em **https://goodjenian.github.io/site-work-up-fit/**
 
 O site é um **export estático** (`output: "export"`). Não existe servidor: tudo
 que uma página mostra é decidido no build.
 
 ```bash
-NEXT_PUBLIC_BASE_PATH=/-site-work-up-fit \
-NEXT_PUBLIC_SITE_URL=https://goodjenian.github.io/-site-work-up-fit \
+NEXT_PUBLIC_BASE_PATH=/site-work-up-fit \
+NEXT_PUBLIC_SITE_URL=https://goodjenian.github.io/site-work-up-fit \
 npm run build          # gera out/ (o prebuild refaz as variantes de imagem)
 ```
 
@@ -109,7 +109,7 @@ npm run build          # gera out/ (o prebuild refaz as variantes de imagem)
 ```bash
 npm run build && touch out/.nojekyll && cd out && git init -q && git add -A \
   && git commit -qm "deploy" \
-  && git push -qf https://github.com/goodjenian/-site-work-up-fit.git HEAD:gh-pages
+  && git push -qf https://github.com/goodjenian/site-work-up-fit.git HEAD:gh-pages
 ```
 
 `.nojekyll` não é opcional: sem ele o Jekyll do Pages descarta `_next/` — a pasta

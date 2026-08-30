@@ -45,8 +45,8 @@ jobs:
         env:
           # Project sites are served from /<repo>/, so every asset and link
           # needs the prefix and every canonical needs the full URL.
-          NEXT_PUBLIC_BASE_PATH: /-site-work-up-fit
-          NEXT_PUBLIC_SITE_URL: https://goodjenian.github.io/-site-work-up-fit
+          NEXT_PUBLIC_BASE_PATH: /site-work-up-fit
+          NEXT_PUBLIC_SITE_URL: https://goodjenian.github.io/site-work-up-fit
         run: npm run build
 
       # Pages serves _next/* only when Jekyll is disabled.
