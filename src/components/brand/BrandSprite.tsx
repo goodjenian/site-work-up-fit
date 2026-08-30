@@ -1,7 +1,8 @@
 import { MARK_PATH } from "./mark-path";
+import { WORDMARK_PATHS, WORDMARK_VIEWBOX } from "./wordmark-path";
 
 /**
- * Defines the brand symbol once per document so `Mark` can reference it with
+ * Defines the brand symbol and lettering once per document so `Mark` can reference it with
  * `<use>` instead of repeating ~11KB of path data. A page renders the mark up
  * to three times (header, footer, decorative watermark); inlining it each time
  * would add ~33KB of HTML for one shape.
@@ -17,6 +18,11 @@ export function BrandSprite() {
             and break the lock-up spacing. */}
       <symbol id="wuf-mark" viewBox="11.88 0 76.24 100">
         <path d={MARK_PATH} fill="currentColor" fillRule="evenodd" stroke="currentColor" />
+      </symbol>
+      <symbol id="wuf-wordmark" viewBox={WORDMARK_VIEWBOX}>
+        {WORDMARK_PATHS.map((d) => (
+          <path key={d} d={d} fill="currentColor" fillRule="evenodd" />
+        ))}
       </symbol>
     </svg>
   );

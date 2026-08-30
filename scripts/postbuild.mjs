@@ -1,5 +1,14 @@
 /**
- * Gives the Open Graph card a real filename.
+ * Post-build fixes for serving the export from a plain static host.
+ *
+ * 1. Writes `.nojekyll`. GitHub Pages runs Jekyll on a branch deploy, and
+ *    Jekyll drops every path segment starting with `_` — which is `_next`
+ *    (all the CSS and JS) and `programs/_opt` (every image). Without this the
+ *    site goes up unstyled and blank. Doing it here, not by hand, because a
+ *    hand-run `touch` does not survive the next `rm -rf out`. It already cost
+ *    one broken deploy.
+ *
+ * 2. Gives the Open Graph card a real filename.
  *
  * `opengraph-image.tsx` exports to `out/opengraph-image` — no extension — and a
  * static host has only the extension to go on, so it serves the PNG as
@@ -11,8 +20,10 @@
  * recognises as a file. Metadata points at `/og.png`; this only has to put the
  * bytes there.
  */
-import { copyFile, stat } from "node:fs/promises";
+import { copyFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
+
+await writeFile(path.resolve("out/.nojekyll"), "");
 
 const from = path.resolve("out/opengraph-image");
 const to = path.resolve("out/og.png");
@@ -27,4 +38,4 @@ try {
 }
 
 await copyFile(from, to);
-console.log(`postbuild: og.png written (${((await stat(to)).size / 1024).toFixed(0)}KB)`);
+console.log(`postbuild: .nojekyll + og.png written (${((await stat(to)).size / 1024).toFixed(0)}KB)`);

@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Mark } from "./Mark";
+import { Wordmark } from "./Wordmark";
 
 /**
  * The brand lock-up, proportioned from the official artwork rather than by eye.
@@ -32,18 +32,7 @@ export function Logo({
         weight={1.5}
         className={cn("h-[var(--mark-h)] shrink-0 text-chalk", markClassName)}
       />
-      <Image
-        src="/brand/wordmark.svg"
-        alt="Work Up Fit"
-        width={274}
-        height={100}
-        priority
-        // Next applies this automatically to a `.svg` src; stated explicitly so
-        // the intent survives a rename. A vector resizes losslessly, so the
-        // optimiser has nothing to gain here.
-        unoptimized
-        className={cn("h-[calc(var(--mark-h)*0.508)] w-auto", wordmarkClassName)}
-      />
+      <Wordmark className={cn("h-[calc(var(--mark-h)*0.508)] text-chalk", wordmarkClassName)} />
     </>
   );
 
