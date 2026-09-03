@@ -116,3 +116,40 @@ Sob `prefers-reduced-motion: reduce`:
 > servidor. Ramificar o JSX nele fazia o servidor renderizar `opacity: 0` e o
 > cliente renderizar sem — o React mantinha o HTML do servidor e **seções
 > inteiras ficavam invisíveis**. A regra CSS não tem como dessincronizar.
+
+---
+
+## Registro editorial (adaptado da Les Mills)
+
+O layout foi adaptado a partir de `lesmills.com/br`, a pedido do cliente. O que
+foi tomado emprestado é **linguagem de layout**, não marca:
+
+| Adotado | Recusado |
+| --- | --- |
+| Hero full-bleed com título gigante e links sublinhados | O verde ácido — o azul `volt-400` é amostrado do artwork da Work Up Fit |
+| Canvas preto quase uniforme (`--color-void`) | A tipografia, as fotos e os textos da referência |
+| Dois registros de heading: `display` × `calm` | O carrossel de depoimentos |
+| Grade escalonada, card sem moldura, índice tipográfico | A faixa de alcance (22k academias, 100 países, 100k instrutores) |
+
+### Os dois registros
+
+`Heading` tem `tone="display"` (condensada, caixa-alta — a voz do wordmark) e
+`tone="calm"` (fonte de texto, caixa baixa, grande). A alternância é o efeito:
+tudo no registro alto vira ruído e não sobra onde pousar. Hero, nomes de
+programa e números são `display`; abertura de seção é `calm`.
+
+### A faixa de números tem TRÊS
+
+E não quatro, como na referência. A Work Up Fit não emitiu nenhuma certificação
+ainda: não há academias, países, instrutores nem anos para contar. Os três
+fatos que existem são 11 metodologias, 4 frentes e origem BR. Um quarto card
+teria de ser inventado — por isso `StatsBand` tem três, e o comentário no
+arquivo diz o porquê para que ninguém "complete" a grade depois.
+
+### Armadilha ao mexer na escala
+
+`--text-hero`, `--text-index`, `--text-stat`, `--text-calm-*` precisam estar
+declaradas em `src/lib/utils.ts` no grupo `font-size` do `tailwind-merge`.
+Sem isso ele trata `text-hero text-chalk` como duas cores concorrentes e
+**descarta o tamanho em silêncio** — o heading renderiza no tamanho padrão sem
+nenhum erro. Já aconteceu com `text-display-*`.
