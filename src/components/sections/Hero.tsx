@@ -21,7 +21,9 @@ const routes = [
 ];
 
 export function Hero() {
-  const cover = programs.find((p) => p.slug === "aerobic")!;
+  // Deliberately not one of the three programmes featured further down: the
+  // hero photograph appearing again as a card image reads as a mistake.
+  const cover = programs.find((p) => p.slug === "jump")!;
 
   return (
     <section className="relative isolate flex min-h-[88svh] flex-col justify-end overflow-hidden bg-void">
