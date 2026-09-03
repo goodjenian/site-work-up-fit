@@ -20,7 +20,7 @@ export function ProgramCard({
 }) {
   return (
     <motion.article
-      className="group relative h-full"
+      className="group relative"
       style={{ ["--accent" as string]: program.accentInk }}
       whileHover={{ y: -6 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
@@ -34,9 +34,11 @@ export function ProgramCard({
             location,
           })
         }
-        className="flex h-full flex-col overflow-hidden rounded-xl border border-ink-600 bg-ink-800 shadow-[var(--shadow-card)] transition-[border-color,box-shadow] duration-300 group-hover:border-[color-mix(in_oklab,var(--accent)_50%,var(--color-ink-600))] group-hover:shadow-[var(--shadow-lift)]"
+        className="flex h-full flex-col"
       >
-        <div className="relative aspect-4/3 overflow-hidden">
+        {/* No border, no panel: on the black canvas the photograph is the card,
+            and the caption sits under it the way a plate caption would. */}
+        <div className="relative aspect-4/5 overflow-hidden rounded-lg bg-ink-850">
           <Image
             src={program.image}
             alt={program.alt}
@@ -48,7 +50,7 @@ export function ProgramCard({
           />
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-t from-ink-800 via-ink-800/35 to-transparent"
+            className="absolute inset-0 bg-gradient-to-t from-void/70 via-transparent to-transparent"
           />
           <span
             aria-hidden="true"
@@ -56,7 +58,7 @@ export function ProgramCard({
           />
         </div>
 
-        <div className="flex flex-1 flex-col gap-3 p-5 md:p-6">
+        <div className="flex flex-1 flex-col gap-3 pt-5">
           <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-muted">
             {familyLabels[program.family]}
           </p>
@@ -76,24 +78,14 @@ export function ProgramCard({
             ))}
           </ul>
 
-          <p className="mt-1 flex-1 text-pretty text-sm leading-relaxed text-muted">
+          <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">
             {program.summary}
           </p>
 
-          <span className="mt-1 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--accent)]">
-            Conhecer certificação
-            <svg
-              viewBox="0 0 16 16"
-              className="size-3.5 transition-transform duration-300 group-hover:translate-x-1"
-              aria-hidden="true"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M2 8h11M9 4l4 4-4 4" />
-            </svg>
+          {/* A span, not a button: the whole card is already the link, and
+              nesting a control inside an anchor is invalid. */}
+          <span className="mt-2 inline-flex h-9 items-center self-start rounded-full border border-white/25 px-5 text-[0.82rem] font-semibold text-chalk transition-colors duration-300 group-hover:border-[var(--accent)] group-hover:text-[var(--accent)]">
+            Conhecer o {program.name}
           </span>
         </div>
       </Link>

@@ -55,7 +55,7 @@ export function RevealGroup({
   children: React.ReactNode;
   className?: string;
   stagger?: number;
-  as?: "div" | "ul" | "ol";
+  as?: "div" | "ul" | "ol" | "dl";
 }) {
   const MotionTag = motion[as];
   return (
@@ -74,11 +74,14 @@ export function RevealGroup({
 export function RevealItem({
   children,
   className,
+  style,
   y = 20,
   as = "div",
 }: {
   children: React.ReactNode;
   className?: string;
+  /** Carries the per-programme `--accent` custom property. */
+  style?: React.CSSProperties;
   y?: number;
   as?: "div" | "li" | "article";
 }) {
@@ -87,6 +90,7 @@ export function RevealItem({
     <MotionTag
       data-reveal=""
       className={cn(className)}
+      style={style}
       variants={{
         hidden: { opacity: 0, y },
         show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },

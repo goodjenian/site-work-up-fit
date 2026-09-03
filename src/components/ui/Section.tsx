@@ -21,10 +21,15 @@ export function Section({
   /** Skip the container — the section handles its own width. */
   bleed?: boolean;
 } & React.HTMLAttributes<HTMLElement>) {
+  /*
+    Near-uniform black. The old navy steps were doing the work that photography
+    and type should do, and every boundary read as a seam. `raised` keeps a
+    whisper of separation for sections that sit back to back.
+  */
   const tones = {
-    base: "bg-ink-900",
-    raised: "bg-ink-850",
-    deep: "bg-ink-950",
+    base: "bg-void",
+    raised: "bg-ink-950",
+    deep: "bg-void",
   } as const;
 
   return (

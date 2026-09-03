@@ -10,6 +10,10 @@
 
 @theme {
   /* --- surfaces ------------------------------------------------------- */
+  /* Editorial black. The navy scale below still carries every card and
+     border; this is the canvas the photography is cut out of, so nothing
+     competes with it. */
+  --color-void: #000000;
   --color-ink-950: #05080F;   /* page background, deepest */
   --color-ink-900: #070B14;   /* default background */
   --color-ink-850: #0B1120;   /* raised background / alternating sections */
@@ -62,6 +66,29 @@
   --text-display-sm: clamp(1.45rem, 2.4vw, 2rem);
   --text-display-sm--line-height: 1.08;
 
+  /* --- editorial scale -------------------------------------------------
+     Two registers that play against each other: `hero`/`index`/`stat` are the
+     loud, condensed, uppercase voice of the wordmark; `calm` is a quiet
+     sentence-case heading in the body face. Alternating them is what stops a
+     page of shouting from reading as noise. */
+  --text-hero: clamp(2.9rem, 8.4vw, 7.5rem);
+  --text-hero--line-height: 0.88;
+  --text-hero--letter-spacing: -0.005em;
+
+  --text-index: clamp(2.1rem, 5.6vw, 4.25rem);
+  --text-index--line-height: 1.04;
+
+  --text-stat: clamp(3.25rem, 8.5vw, 7rem);
+  --text-stat--line-height: 0.86;
+
+  --text-calm-lg: clamp(1.55rem, 3.3vw, 2.75rem);
+  --text-calm-lg--line-height: 1.14;
+  --text-calm-lg--letter-spacing: -0.021em;
+
+  --text-calm-md: clamp(1.3rem, 2.3vw, 1.9rem);
+  --text-calm-md--line-height: 1.2;
+  --text-calm-md--letter-spacing: -0.018em;
+
   /* --- motion --------------------------------------------------------- */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -89,7 +116,7 @@ html {
 }
 
 body {
-  background-color: var(--color-ink-900);
+  background-color: var(--color-void);
   color: var(--color-chalk);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -137,7 +164,14 @@ body {
 
 /* Section rhythm */
 @utility section-y {
-  padding-block: clamp(4rem, 9vw, 7.5rem);
+  padding-block: clamp(5rem, 11vw, 10rem);
+}
+
+/* A section that opens right under the page hero has already been given room
+   by the hero itself; a second full pad reads as a hole rather than as air.
+   Unlayered, so it beats the `section-y` utility. */
+[data-page-hero] + .section-y {
+  padding-top: clamp(1.75rem, 3.5vw, 3rem);
 }
 
 /* Subtle animated grain/glow used behind hero + CTA blocks */

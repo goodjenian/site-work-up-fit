@@ -5,7 +5,7 @@ import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 import { track } from "@/lib/analytics";
 
-type Variant = "primary" | "secondary" | "ghost" | "accent";
+type Variant = "primary" | "secondary" | "ghost" | "accent" | "outline" | "light";
 type Size = "sm" | "md" | "lg";
 
 const base =
@@ -22,10 +22,14 @@ const variants: Record<Variant, string> = {
   secondary:
     "border border-ink-500 bg-ink-800/70 text-chalk hover:bg-ink-700 hover:border-ink-500 backdrop-blur-sm",
   ghost: "text-chalk-dim hover:text-chalk hover:bg-white/5",
+  // Sits directly on the black canvas, where a filled navy surface would read
+  // as a stray panel rather than a control.
+  outline: "border border-white/25 text-chalk hover:border-chalk hover:bg-white/8",
+  light: "bg-chalk text-ink-950 hover:bg-white",
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-9 px-4 text-sm",
+  sm: "h-9 px-5 text-[0.82rem]",
   md: "h-11 px-6 text-[0.95rem]",
   lg: "h-13 px-8 text-base md:text-lg",
 };

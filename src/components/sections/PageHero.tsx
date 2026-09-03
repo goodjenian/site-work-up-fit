@@ -25,7 +25,8 @@ export function PageHero({
 }) {
   return (
     <section
-      className={cn("relative overflow-hidden bg-ink-950 pt-28 pb-14 md:pt-36 md:pb-20", className)}
+      data-page-hero=""
+      className={cn("relative overflow-hidden bg-void pt-28 pb-4 md:pt-36 md:pb-6", className)}
       style={accent ? ({ ["--accent" as string]: accent } as React.CSSProperties) : undefined}
     >
       <div

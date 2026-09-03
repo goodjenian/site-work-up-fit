@@ -1,4 +1,7 @@
 import { Hero } from "@/components/sections/Hero";
+import { Manifesto } from "@/components/sections/Manifesto";
+import { ProgramMarquee } from "@/components/sections/ProgramMarquee";
+import { StatsBand } from "@/components/sections/StatsBand";
 import { BrandPromise } from "@/components/sections/BrandPromise";
 import { Ecosystem } from "@/components/sections/Ecosystem";
 import { ProgramsShowcase } from "@/components/sections/ProgramsShowcase";
@@ -49,16 +52,21 @@ export default function HomePage() {
         }}
       />
 
+      {/* Order follows the reference's rhythm: one image, one statement, then
+          the product — and only after that the explanation of how it works. */}
       <Hero />
-      <BrandPromise />
-      <Ecosystem />
+      <Manifesto />
+      <ProgramMarquee />
       <ProgramsShowcase />
+      <Proof />
+      <Ecosystem />
+      <BrandPromise />
+      <Experiences />
       <HowItWorks />
       <Audiences />
       <Community />
-      <Experiences />
       <ForGyms />
-      <Proof />
+      <StatsBand />
       <FaqSection faqs={faqs.slice(0, 6)} tone="base" />
       <FinalCta />
     </>
