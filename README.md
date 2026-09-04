@@ -87,7 +87,9 @@ decorativo que pode simplesmente não existir, use `useMotionAllowed()`, que é
 - 15 rotas × 3 larguras (390 / 768 / 1440): sem overflow horizontal, hierarquia
   de headings correta, todo `<img>` com alt, todo campo com label, um `<h1>` por
   página, canonical e meta description presentes
-- LCP 128–1500 ms e CLS 0 em todas as rotas medidas (mobile, CPU 4× lento)
+- LCP 128–1500 ms e CLS 0 em todas as rotas medidas (mobile, CPU 4× lento).
+  A home mede 224 ms nessas condições desde que a abertura deixou de carregar
+  uma imagem: o elemento LCP passou a ser o próprio título
 - Menu mobile, validação de formulário, acordeão de FAQ e filtro do catálogo
   testados por automação de browser
 

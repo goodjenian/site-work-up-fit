@@ -153,3 +153,49 @@ declaradas em `src/lib/utils.ts` no grupo `font-size` do `tailwind-merge`.
 Sem isso ele trata `text-hero text-chalk` como duas cores concorrentes e
 **descarta o tamanho em silêncio** — o heading renderiza no tamanho padrão sem
 nenhum erro. Já aconteceu com `text-display-*`.
+
+---
+
+## A abertura: símbolo em arame, sem fotografia
+
+A home não abre mais com uma ilustração em tela cheia. O acervo da marca são 22
+peças geradas por IA; exibidas a ~3× o tamanho do arquivo, elas comunicam *aula
+de ginástica*, não *certificadora* — e o teto de credibilidade da abertura era o
+teto dessa imagem. As ilustrações continuam no site, contidas e legendadas nos
+cards e nas páginas de metodologia, que é onde funcionam.
+
+No lugar delas entrou a identidade:
+
+| Camada | O quê | Onde |
+| --- | --- | --- |
+| Campo | Três gradientes radiais à deriva, compostos em `screen` | `.hero-field`, em `globals.css` |
+| Símbolo | A marca extrudada em z e girando, desenhada em canvas | `brand/MarkWireframe.tsx` |
+| Holofote | As onze metodologias, uma por vez, na cor de cada uma | `sections/Hero.tsx` |
+
+A cor é uma só nas três camadas: trocar a metodologia em destaque atravessa a
+abertura inteira. Ela vem de `accentInk`, nunca de `accent` — duas metodologias
+têm cor oficial escura demais para texto sobre preto.
+
+**Geometria.** `brand/mark-wire.ts` é gerado por
+`scripts/sample-mark-wire.mjs`: cada subpath de `MARK_PATH` é percorrido com
+`getPointAtLength` a passo constante de 1,8 unidade num Chrome headless. São 9
+contornos e 591 pontos — o traço da marca é um fio, então cada triângulo entra
+com um contorno externo e um interno, e extrudados os dois viram as bordas de
+uma fita. É daí que vem o volume. Editar a marca exige rodar o script de novo.
+
+**Armadilhas que o motor de referência tinha e aqui não pode ter.** O exemplo em
+que este desenho se baseia mede o canvas uma vez, fixa a densidade de pixel em 2
+e rechama `requestAnimationFrame` para sempre. Num app com navegação isso vira
+um canvas fora da tela consumindo CPU. A versão daqui cancela o quadro ao
+desmontar, observa redimensionamento, para quando a aba está oculta ou o canvas
+saiu da viewport, e agrupa as ~1.200 arestas em sete faixas de opacidade — sete
+`stroke()` por quadro em vez de mil e duzentos.
+
+**Sem JavaScript** o canvas fica vazio, então o símbolo chapado é servido no
+HTML e só sai quando o arame desenha o primeiro quadro. Com
+`prefers-reduced-motion` desenha-se um quadro só, num ângulo escolhido, e o
+holofote não gira.
+
+**Efeito no desempenho:** a abertura não tem mais imagem `priority`, o elemento
+LCP passou a ser o título, e a home caiu de 712 ms para **224 ms** no celular com
+CPU 4× lenta. CLS segue 0 — nada anima largura, altura ou posição de fluxo.
