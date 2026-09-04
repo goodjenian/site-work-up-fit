@@ -18,6 +18,7 @@ npx tsc --noEmit     # checagem de tipos
 | [`docs/01-arquitetura.md`](docs/01-arquitetura.md) | Sitemap, wireframe da home, arquitetura de componentes e técnica |
 | [`docs/02-design-tokens.md`](docs/02-design-tokens.md) | Cor, tipografia, espaço, sombra, motion |
 | [`docs/03-pendencias-de-conteudo.md`](docs/03-pendencias-de-conteudo.md) | **O que falta e onde entra.** Checklist de go-live |
+| [`docs/05-handoff-area-do-aluno.md`](docs/05-handoff-area-do-aluno.md) | **Handoff para o backend.** Por que a área do aluno não cabe no export estático, as 3 arquiteturas possíveis e as costuras já prontas |
 
 ## A regra que rege este repositório
 

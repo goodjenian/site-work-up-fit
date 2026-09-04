@@ -83,7 +83,7 @@ caminhos já está escrito e testado.
 junto com o primeiro artigo. Enquanto vazio, `/blog` fica fora do `sitemap.xml`.
 
 ### 10. Registro de certificados
-`CERTIFICATE_REGISTRY_ENDPOINT`.
+`NEXT_PUBLIC_CERTIFICATE_REGISTRY_ENDPOINT`.
 **Comportamento atual:** `/validar-certificado/[código]` responde
 *"a validação online ainda não está ativa"* — deliberadamente **não** responde
 "certificado não encontrado", que daria a entender que o registro foi

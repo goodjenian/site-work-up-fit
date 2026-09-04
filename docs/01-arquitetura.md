@@ -177,7 +177,7 @@ desses módulos — os componentes já lidam com lista vazia e campo nulo.
 |---|---|---|
 | `lib/analytics.ts` | `track()` empurra evento tipado para `window.dataLayer`; nenhum script carregado, nenhuma requisição | Adicionar GTM/GA4 no layout. As chamadas nos componentes não mudam. |
 | `lib/leads.ts` | Sem endpoint → devolve `{ok:false, reason:"not-configured"}` e o formulário **avisa** que não enviou | `NEXT_PUBLIC_LEADS_ENDPOINT` |
-| `lib/certificates.ts` | Sem registro → devolve `unavailable` (nunca `not-found`, que acusaria falsidade) | `CERTIFICATE_REGISTRY_ENDPOINT` |
+| `lib/certificates.ts` | Sem registro → devolve `unavailable` (nunca `not-found`, que acusaria falsidade) | `NEXT_PUBLIC_CERTIFICATE_REGISTRY_ENDPOINT` |
 
 ### Eventos de analytics já instrumentados
 
