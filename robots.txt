@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /validar-certificado?*
+
+Host: https://goodjenian.github.io/site-work-up-fit
+Sitemap: https://goodjenian.github.io/site-work-up-fit/sitemap.xml
